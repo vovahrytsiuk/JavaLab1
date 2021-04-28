@@ -14,6 +14,7 @@ public class Randomaiser {
     new Qualification(" junior se "), new Qualification(" Senior SE "), new Qualification(" Middle SE "),
     new Qualification("HR manager ")};
 
+
     public Appointment getRandomAppointment(){
 
         return appointments[random.nextInt(1000000)%appointments.length];
