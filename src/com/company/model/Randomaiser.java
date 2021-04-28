@@ -2,7 +2,7 @@ package com.company.model;
 
 import java.util.Arrays;
 import java.util.Random;
-
+//it is message for lab2
 public class Randomaiser {
     private final Random random = new Random();
     private static final Appointment[] appointments = {new Appointment("Creating"), new Appointment("Fixing__"),
