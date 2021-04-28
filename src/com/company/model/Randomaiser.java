@@ -7,12 +7,12 @@ public class Randomaiser {
     private final Random random = new Random();
     private static final Appointment[] appointments = {new Appointment("Creating"), new Appointment("Fixing__"),
     new Appointment("Updating"), new Appointment("Debuging")};
-    private static final Task[] tasks = {new Task("fix little bug"), new Task("fix ui adapt"),
-    new Task("fix backend"), new Task("fix frontend"), new Task ("fix mobile_"),
-    new Task("new feature"), new Task("new backend"), new Task("new frontend")};
-    private static final Qualification[] qualifications = {new Qualification("QA engeneer"), new Qualification("recruiter"),
-    new Qualification("junior se"), new Qualification("Senior SE"), new Qualification("Middle SE"),
-    new Qualification("HR manager")};
+    private static final Task[] tasks = {new Task("fix little bug"), new Task("fix  ui  adapt"),
+    new Task("fix   backend "), new Task("fix  frontend "), new Task ("fix   mobile  "),
+    new Task("new   feature "), new Task("new   backend "), new Task("new  frontend ")};
+    private static final Qualification[] qualifications = {new Qualification("QA engeneer"), new Qualification(" recruiter "),
+    new Qualification(" junior se "), new Qualification(" Senior SE "), new Qualification(" Middle SE "),
+    new Qualification("HR manager ")};
 
     public Appointment getRandomAppointment(){
 

@@ -27,13 +27,15 @@ public class InputUtility {
         return commandID;
     }
 
-    public static Appointment readAppointment(){
+    public static Appointment readAppointment(View view){
         Scanner scanner = new Scanner(System.in);
+        view.printMessage(view.requestAppointmentMessage);
         String appointmentTitle = scanner.nextLine();
         return new Appointment(appointmentTitle);
     }
 
-    public static Qualification readQualification(){
+    public static Qualification readQualification(View view){
+        view.printMessage(view.requestQualificationMessage);
         Scanner scanner = new Scanner(System.in);
         String qualificationTitle = scanner.nextLine();
         return new Qualification(qualificationTitle);

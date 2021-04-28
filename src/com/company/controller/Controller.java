@@ -15,10 +15,10 @@ public class Controller {
                     view.printData(filter.getAllData());
                     break;
                 case 2:
-                    view.printData(filter.getByAppoinment(InputUtility.readAppointment()));
+                    view.printData(filter.getByAppoinment(InputUtility.readAppointment(view)));
                     break;
                 case 3:
-                    view.printData(filter.getByQualification(InputUtility.readQualification()));
+                    view.printData(filter.getByQualification(InputUtility.readQualification(view)));
                     break;
                 default:
                     view.printMessage(view.failedInputMessage);

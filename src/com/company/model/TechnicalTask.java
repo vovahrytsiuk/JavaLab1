@@ -71,7 +71,7 @@ public class TechnicalTask {
         techTaskView += Arrays.toString(this.tasks);
         techTaskView += '\t';
         techTaskView += Arrays.toString(this.qualifications);
-        techTaskView += '\t';
+        techTaskView += "\t\t";
         techTaskView += String.valueOf(this.specialistCount);
         
         return techTaskView;
