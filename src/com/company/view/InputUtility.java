@@ -10,20 +10,12 @@ public class InputUtility {
         int commandID;
         Scanner scanner = new Scanner(System.in);
         view.printMessage(view.menuMessage);
-        do{
             while(!scanner.hasNextInt()){
                 view.printMessage(view.failedInputMessage);
                 view.printMessage(view.menuMessage);
                 scanner.next();
             }
             commandID = scanner.nextInt();
-            if(commandID < 0 || commandID > 3){
-                view.printMessage(view.failedInputMessage);
-                view.printMessage(view.menuMessage);
-            }
-
-        }
-        while(commandID < 0 || commandID > 3);
         return commandID;
     }
 
