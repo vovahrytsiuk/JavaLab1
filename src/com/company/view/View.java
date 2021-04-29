@@ -3,7 +3,7 @@ package com.company.view;
 import com.company.model.*;
 
 public class View {
-    public static final String emptyTableMessage = "Table is empty/n";
+    public static final String emptyTableMessage = "Table is empty\n";
     public static final String menuMessage = "Please, choose the feature\n" +
             "\t0-Exit\n" +
             "\t1-Get all data\n" +
