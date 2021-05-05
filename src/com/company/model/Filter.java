@@ -1,9 +1,21 @@
 package com.company.model;
 
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 import java.util.Arrays;
 
 public class Filter {
-    private TechnicalTaskStorage storage = new TechnicalTaskStorage();
+    private TechnicalTaskStorage storage;
+
+    public Filter(String filePath)throws IOException, ParseException {
+        storage = new TechnicalTaskStorage(filePath);
+        int i = 0;
+    }
+
+    public Filter(){
+        storage = new TechnicalTaskStorage();
+    }
 
     public TechnicalTask[] getAllData(){
         return storage.getAllData();

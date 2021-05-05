@@ -6,10 +6,14 @@ import com.company.controller.exceptions.FailCommandException;
 import com.company.controller.validator.Validator;
 import com.company.model.*;
 import com.company.view.*;
+import org.json.simple.parser.ParseException;
+
+import java.io.IOException;
 
 public class Controller {
     private View view = new View();
-    private Filter filter = new Filter();
+    private Filter filter;
+
 
     private int readValidCommand(){
         int commandID;
@@ -54,24 +58,33 @@ public class Controller {
         }
     }
 
-    public void calculate(){
-        int commandID = readValidCommand();
-        while(commandID!=0){
-            switch(commandID){
-                case 1:
-                    View.printData(filter.getAllData());
-                    break;
-                case 2:
-                    printDataByAppointment();
-                    break;
-                case 3:
-                    printDataByQualifications();
-                    break;
-                default:
-                    View.printMessage(View.failedInputMessage);
-                    break;
-            }
-            commandID = readValidCommand();
+    private void requestsSaving(){
+        try{
+            FileInteractionUtility.saveDataToJson(filter.getAllData(), "data.json");
+        }catch (IOException e){
+            view.printMessage(e.getMessage());
         }
+    }
+
+    public void calculate(){
+        try {
+            this.filter = new Filter("data.json");
+            int commandID = readValidCommand();
+            while(commandID!=0){
+                switch (commandID) {
+                    case 1 -> View.printData(this.filter.getAllData());
+                    case 2 -> printDataByAppointment();
+                    case 3 -> printDataByQualifications();
+                    default -> View.printMessage(View.failedInputMessage);
+                }
+                commandID = readValidCommand();
+            }
+            //requests to save data
+            requestsSaving();
+        }
+        catch (Exception e){
+            View.printMessage(e.getMessage());
+        }
+
     }
 }
