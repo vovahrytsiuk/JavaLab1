@@ -18,15 +18,22 @@ import org.json.simple.parser.ParseException;
 // class that can read/write array of technical tasks from json format and save search result in txt file
 public class FileInteractionUtility {
 
+    private static final String numberTag = "number";
+    private static final String appointmentTag = "appointment";
+    private static final String tasksTag = "tasks";
+    private static final String qualificationsTag = "qualifications";
+    private static final String specialistCountTag = "specialistCount";
+    private static final String titleTag = "title";
+
     private static void readData(JSONArray ttData, TechnicalTask[] technicalTasks){
         int i = 0;
         for(Object ttObject:ttData){
             JSONObject ttJsonObject = (JSONObject) ttObject;
-            technicalTasks[i] = (new TechnicalTask((int)(long) ttJsonObject.get("number"),
-                    new Appointment((String)ttJsonObject.get("appointment")),
-                    parseTaskArray((JSONArray) ttJsonObject.get("tasks")),
-                    parseQualificationArray((JSONArray) ttJsonObject.get("qualifications")),
-                    (int)(long) ttJsonObject.get("specialistCount")));
+            technicalTasks[i] = (new TechnicalTask((int)(long) ttJsonObject.get(numberTag),
+                    new Appointment((String)ttJsonObject.get(appointmentTag)),
+                    parseTaskArray((JSONArray) ttJsonObject.get(tasksTag)),
+                    parseQualificationArray((JSONArray) ttJsonObject.get(qualificationsTag)),
+                    (int)(long) ttJsonObject.get(specialistCountTag)));
             i++;
         }
     }
@@ -36,7 +43,7 @@ public class FileInteractionUtility {
         int i = 0;
         for(Object value:jsonArray){
             JSONObject valueJson = (JSONObject) value;
-            tasks[i] = new Task((String) valueJson.get("title"));
+            tasks[i] = new Task((String) valueJson.get(titleTag));
             i++;
         }
 
@@ -48,7 +55,7 @@ public class FileInteractionUtility {
         int i = 0;
         for(Object value:jsonArray){
             JSONObject valueJson = (JSONObject) value;
-            qualifications[i] = new Qualification((String) valueJson.get("title"));
+            qualifications[i] = new Qualification((String) valueJson.get(titleTag));
             i++;
         }
 
@@ -81,12 +88,12 @@ public class FileInteractionUtility {
     private static void dataToJsonArray(JSONArray jsonArray, TechnicalTask[] technicalTasks){
         for(TechnicalTask technicalTask : technicalTasks){
             JSONObject ttJsonObject = new JSONObject();
-            ttJsonObject.put("number", technicalTask.getNumber());
-            ttJsonObject.put("appointment", technicalTask.getAppointment().toString());
+            ttJsonObject.put(numberTag, technicalTask.getNumber());
+            ttJsonObject.put(appointmentTag, technicalTask.getAppointment().toString());
 
-            ttJsonObject.put("tasks",dataToJsonInArray(convertTasksArrayToStringArray(technicalTask.getTasks())));
-            ttJsonObject.put("qualifications", dataToJsonInArray(convertQualificationsArrayToStringArray(technicalTask.getQualifications())));
-            ttJsonObject.put("specialistCount", technicalTask.getSpecialistCount());
+            ttJsonObject.put(tasksTag,dataToJsonInArray(convertTasksArrayToStringArray(technicalTask.getTasks())));
+            ttJsonObject.put(qualificationsTag, dataToJsonInArray(convertQualificationsArrayToStringArray(technicalTask.getQualifications())));
+            ttJsonObject.put(specialistCountTag, technicalTask.getSpecialistCount());
             jsonArray.add(ttJsonObject);
         }
     }
@@ -95,7 +102,7 @@ public class FileInteractionUtility {
         JSONArray jsonArray = new JSONArray();
         for(T value : data){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("title", value);
+            jsonObject.put(titleTag, value);
             jsonArray.add(jsonObject);
         }
         return  jsonArray;

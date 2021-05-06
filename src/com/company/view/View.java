@@ -16,6 +16,7 @@ public class View {
     public static final String failCommandMessage = "Wrong input command";
     public static final String emptyAppointmentMessage = "Wrong input appointment - appointment can't be empty";
     public static final String emptyQualificationsMessage = "Wrong input qualifications - qualifications can't be empty";
+    public static final String loadOrGenerateDataMessage = "Do u want to load saved data? Enter 0/1";
 
     public static void printMessage(String message){
         System.out.println(message);

@@ -6,6 +6,19 @@ import com.company.model.Qualification;
 import java.util.Scanner;
 
 public class InputUtility {
+
+    public static int rearInt(View view){
+        int commandID;
+        Scanner scanner = new Scanner(System.in);
+        view.printMessage(View.loadOrGenerateDataMessage);
+        while(!scanner.hasNextInt()){
+            view.printMessage(view.failedInputMessage);
+            view.printMessage(View.loadOrGenerateDataMessage);
+            scanner.next();
+        }
+        commandID = scanner.nextInt();
+        return commandID;
+    }
     public static int readCommand(View view){
         int commandID;
         Scanner scanner = new Scanner(System.in);

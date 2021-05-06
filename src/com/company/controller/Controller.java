@@ -35,11 +35,16 @@ public class Controller {
             try{
                 Appointment newAppointment = InputUtility.readAppointment(view);
                 Validator.checkInputAppointment(newAppointment);
-                View.printData(filter.getByAppoinment(newAppointment));
+                TechnicalTask[] data = filter.getByAppoinment(newAppointment);
+                View.printData(data);
+                ProcessLogFile.saveResultsToFile(data, 2, newAppointment.getTitle());
                 break;
             }
             catch(EmptyAppointmentException exc){
                 View.printMessage(exc.getMessage());
+            }
+            catch(IOException e){
+                View.printMessage(e.getMessage());
             }
         }
     }
@@ -49,11 +54,16 @@ public class Controller {
             try{
                 Qualification newQualification = InputUtility.readQualification(view);
                 Validator.checkInputQualifications(newQualification);
-                View.printData(filter.getByQualification(newQualification));
+                TechnicalTask[]data = filter.getByQualification(newQualification);
+                View.printData(data);
+                ProcessLogFile.saveResultsToFile(data, 3, newQualification.getTitle());
                 break;
             }
             catch(EmptyQualificationsException exc){
                 View.printMessage(exc.getMessage());
+            }
+            catch(IOException e){
+                View.printMessage(e.getMessage());
             }
         }
     }
@@ -66,9 +76,32 @@ public class Controller {
         }
     }
 
+    private int readLoadCommand(){
+        int commandID;
+        while(true){
+            try{
+                commandID = InputUtility.rearInt(view);
+                Validator.checkInputCommand(commandID);
+                if(commandID == 0 || commandID == 1){
+                    break;
+                }
+            }
+            catch(FailCommandException exc){
+                View.printMessage(exc.getMessage());
+            }
+        }
+        return commandID;
+    }
+
     public void calculate(){
         try {
-            this.filter = new Filter("data.json");
+            if(readLoadCommand() == 1){
+                this.filter = new Filter("data.json");
+            }
+            else{
+                this.filter = new Filter();
+            }
+
             int commandID = readValidCommand();
             while(commandID!=0){
                 switch (commandID) {
